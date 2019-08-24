@@ -1,0 +1,22 @@
+[Unit]
+Description=Encocoin's distributed currency daemon
+After=network.target
+
+[Service]
+User=encocoincore
+Group=encocoincore
+
+Type=forking
+PIDFile=/var/lib/encocoind/encocoind.pid
+ExecStart=/usr/bin/encocoind -daemon -pid=/var/lib/encocoind/encocoind.pid \
+-conf=/etc/encocoincore/encocoin.conf -datadir=/var/lib/encocoind -disablewallet
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target
